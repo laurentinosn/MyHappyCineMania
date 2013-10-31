@@ -1,0 +1,5 @@
+my_happy_cine_mania:
+    resource: "@MyHappyCineManiaBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
