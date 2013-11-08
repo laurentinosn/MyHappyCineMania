@@ -20,7 +20,16 @@ class Cinema
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
+    
+    /**
+     * @var Pessoa
+     * 
+     * @ORM\ManyToOne(targetEntity="Pessoa")
+     * @ORM\JoinColumn(name="pessoa", referencedColumnName="id")
+     * 
+     */
+    private $pessoa;
+    
     /**
      * @var string
      *
@@ -56,6 +65,14 @@ class Cinema
      */
     private $endereco;
 
+    /**
+     * 
+     * @return String
+     */
+    public function __toString()
+    {
+        return $this->getNome();
+    }
 
     /**
      * Get id
@@ -180,5 +197,28 @@ class Cinema
     public function getEndereco()
     {
         return $this->endereco;
+    }
+
+    /**
+     * Set pessoa
+     *
+     * @param integer $pessoa
+     * @return Cinema
+     */
+    public function setPessoa($pessoa)
+    {
+        $this->pessoa = $pessoa;
+    
+        return $this;
+    }
+
+    /**
+     * Get pessoa
+     *
+     * @return integer 
+     */
+    public function getPessoa()
+    {
+        return $this->pessoa;
     }
 }

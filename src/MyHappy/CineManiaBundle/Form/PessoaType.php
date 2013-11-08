@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class CinemaType extends AbstractType
+class PessoaType extends AbstractType
 {
         /**
      * @param FormBuilderInterface $builder
@@ -16,11 +16,14 @@ class CinemaType extends AbstractType
     {
         $builder
             ->add('nome')
-            ->add('cnpj')
             ->add('login')
+            ->add('email')
             ->add('senha')
-            ->add('endereco')
-            ->add('pessoa')
+            ->add('documento')
+            ->add('cidade')
+            ->add('cep')
+            ->add('bairro')
+            ->add('nomeFantasia')
         ;
     }
     
@@ -30,7 +33,7 @@ class CinemaType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'MyHappy\CineManiaBundle\Entity\Cinema'
+            'data_class' => 'MyHappy\CineManiaBundle\Entity\Pessoa'
         ));
     }
 
@@ -39,6 +42,6 @@ class CinemaType extends AbstractType
      */
     public function getName()
     {
-        return 'myhappy_cinemaniabundle_cinema';
+        return 'myhappy_cinemaniabundle_pessoa';
     }
 }

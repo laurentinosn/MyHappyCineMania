@@ -1,0 +1,60 @@
+{#{% extends '::base.html.twig' %}#}
+
+{% block body -%}
+    <h1>Promocao</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Datacriacao</th>
+                <td>{{ entity.dataCriacao|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Datavalidade</th>
+                <td>{{ entity.dataValidade|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Descricao</th>
+                <td>{{ entity.descricao }}</td>
+            </tr>
+            <tr>
+                <th>Filme</th>
+                <td>{{ entity.filme }}</td>
+            </tr>
+            <tr>
+                <th>Imagem</th>
+                <td>{{ entity.imagem }}</td>
+            </tr>
+            <tr>
+                <th>Regra</th>
+                <td>{{ entity.regra }}</td>
+            </tr>
+            <tr>
+                <th>Cinema</th>
+                <td>{{ entity.cinema }}</td>
+            </tr>
+            <tr>
+                <th>Cinefilo</th>
+                <td>{{ entity.cinefilo }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('promocao') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('promocao_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}
