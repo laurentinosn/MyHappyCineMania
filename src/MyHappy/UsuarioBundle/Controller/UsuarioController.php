@@ -1,27 +1,27 @@
 <?php
 
-namespace MyHappy\CineManiaBundle\Controller;
+namespace MyHappy\UsuarioBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use MyHappy\CineManiaBundle\Entity\Cinema;
-use MyHappy\CineManiaBundle\Form\CinemaType;
+use MyHappy\UsuarioBundle\Entity\Usuario;
+use MyHappy\UsuarioBundle\Form\UsuarioType;
 
 /**
- * Cinema controller.
+ * Usuario controller.
  *
- * @Route("/cinema")
+ * @Route("/usuario")
  */
-class CinemaController extends Controller
+class UsuarioController extends Controller
 {
 
     /**
-     * Lists all Cinema entities.
+     * Lists all Usuario entities.
      *
-     * @Route("/", name="cinema")
+     * @Route("/", name="usuario")
      * @Method("GET")
      * @Template()
      */
@@ -29,22 +29,22 @@ class CinemaController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('MyHappyCineManiaBundle:Cinema')->findAll();
+        $entities = $em->getRepository('MyHappyUsuarioBundle:Usuario')->findAll();
 
         return array(
             'entities' => $entities,
         );
     }
     /**
-     * Creates a new Cinema entity.
+     * Creates a new Usuario entity.
      *
-     * @Route("/", name="cinema_create")
+     * @Route("/", name="usuario_create")
      * @Method("POST")
-     * @Template("MyHappyCineManiaBundle:Cinema:new.html.twig")
+     * @Template("MyHappyUsuarioBundle:Usuario:new.html.twig")
      */
     public function createAction(Request $request)
     {
-        $entity = new Cinema();
+        $entity = new Usuario();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
@@ -53,7 +53,7 @@ class CinemaController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('cinema_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('usuario_show', array('id' => $entity->getId())));
         }
 
         return array(
@@ -63,16 +63,16 @@ class CinemaController extends Controller
     }
 
     /**
-    * Creates a form to create a Cinema entity.
+    * Creates a form to create a Usuario entity.
     *
-    * @param Cinema $entity The entity
+    * @param Usuario $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createCreateForm(Cinema $entity)
+    private function createCreateForm(Usuario $entity)
     {
-        $form = $this->createForm(new CinemaType(), $entity, array(
-            'action' => $this->generateUrl('cinema_create'),
+        $form = $this->createForm(new UsuarioType(), $entity, array(
+            'action' => $this->generateUrl('usuario_create'),
             'method' => 'POST',
         ));
 
@@ -82,15 +82,15 @@ class CinemaController extends Controller
     }
 
     /**
-     * Displays a form to create a new Cinema entity.
+     * Displays a form to create a new Usuario entity.
      *
-     * @Route("/new", name="cinema_new")
+     * @Route("/new", name="usuario_new")
      * @Method("GET")
      * @Template()
      */
     public function newAction()
     {
-        $entity = new Cinema();
+        $entity = new Usuario();
         $form   = $this->createCreateForm($entity);
 
         return array(
@@ -100,9 +100,9 @@ class CinemaController extends Controller
     }
 
     /**
-     * Finds and displays a Cinema entity.
+     * Finds and displays a Usuario entity.
      *
-     * @Route("/{id}", name="cinema_show")
+     * @Route("/{id}", name="usuario_show")
      * @Method("GET")
      * @Template()
      */
@@ -110,10 +110,10 @@ class CinemaController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('MyHappyCineManiaBundle:Cinema')->find($id);
+        $entity = $em->getRepository('MyHappyUsuarioBundle:Usuario')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Cinema entity.');
+            throw $this->createNotFoundException('Unable to find Usuario entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -125,9 +125,9 @@ class CinemaController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing Cinema entity.
+     * Displays a form to edit an existing Usuario entity.
      *
-     * @Route("/{id}/edit", name="cinema_edit")
+     * @Route("/{id}/edit", name="usuario_edit")
      * @Method("GET")
      * @Template()
      */
@@ -135,10 +135,10 @@ class CinemaController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('MyHappyCineManiaBundle:Cinema')->find($id);
+        $entity = $em->getRepository('MyHappyUsuarioBundle:Usuario')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Cinema entity.');
+            throw $this->createNotFoundException('Unable to find Usuario entity.');
         }
 
         $editForm = $this->createEditForm($entity);
@@ -152,16 +152,16 @@ class CinemaController extends Controller
     }
 
     /**
-    * Creates a form to edit a Cinema entity.
+    * Creates a form to edit a Usuario entity.
     *
-    * @param Cinema $entity The entity
+    * @param Usuario $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createEditForm(Cinema $entity)
+    private function createEditForm(Usuario $entity)
     {
-        $form = $this->createForm(new CinemaType(), $entity, array(
-            'action' => $this->generateUrl('cinema_update', array('id' => $entity->getId())),
+        $form = $this->createForm(new UsuarioType(), $entity, array(
+            'action' => $this->generateUrl('usuario_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -170,20 +170,20 @@ class CinemaController extends Controller
         return $form;
     }
     /**
-     * Edits an existing Cinema entity.
+     * Edits an existing Usuario entity.
      *
-     * @Route("/{id}", name="cinema_update")
+     * @Route("/{id}", name="usuario_update")
      * @Method("PUT")
-     * @Template("MyHappyCineManiaBundle:Cinema:edit.html.twig")
+     * @Template("MyHappyUsuarioBundle:Usuario:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('MyHappyCineManiaBundle:Cinema')->find($id);
+        $entity = $em->getRepository('MyHappyUsuarioBundle:Usuario')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Cinema entity.');
+            throw $this->createNotFoundException('Unable to find Usuario entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -193,7 +193,7 @@ class CinemaController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('cinema_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('usuario_edit', array('id' => $id)));
         }
 
         return array(
@@ -203,9 +203,9 @@ class CinemaController extends Controller
         );
     }
     /**
-     * Deletes a Cinema entity.
+     * Deletes a Usuario entity.
      *
-     * @Route("/{id}", name="cinema_delete")
+     * @Route("/{id}", name="usuario_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
@@ -215,21 +215,21 @@ class CinemaController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('MyHappyCineManiaBundle:Cinema')->find($id);
+            $entity = $em->getRepository('MyHappyUsuarioBundle:Usuario')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Cinema entity.');
+                throw $this->createNotFoundException('Unable to find Usuario entity.');
             }
 
             $em->remove($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('cinema'));
+        return $this->redirect($this->generateUrl('usuario'));
     }
 
     /**
-     * Creates a form to delete a Cinema entity by id.
+     * Creates a form to delete a Usuario entity by id.
      *
      * @param mixed $id The entity id
      *
@@ -238,26 +238,10 @@ class CinemaController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('cinema_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('usuario_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
         ;
-    }
-    
-    /**
-     * Exibe os cinemas do momento.
-     *
-     * @Route("/destaques/show", name="cinema_destaques")
-     * @Method("GET")
-     * @Template()
-     */
-    public function cinemaDestaqueAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-        
-        $cinemas = $em->getRepository("MyHappyCineManiaBundle:Cinema")->findBy(array(), array("id" => "desc"), 3);
-        
-        return array("cinemas" => $cinemas);
     }
 }
