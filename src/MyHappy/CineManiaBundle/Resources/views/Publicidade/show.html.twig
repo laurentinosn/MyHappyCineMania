@@ -1,0 +1,40 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Publicidade</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Datainicio</th>
+                <td>{{ entity.dataInicio|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Datafim</th>
+                <td>{{ entity.dataFim|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Nome</th>
+                <td>{{ entity.nome }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('publicidade') }}">
+            Voltar para a Lista
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('publicidade_edit', { 'id': entity.id }) }}">
+            Editar
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

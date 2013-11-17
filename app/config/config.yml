@@ -70,3 +70,9 @@ fos_user:
     db_driver: orm 
     firewall_name: main
     user_class: MyHappy\UsuarioBundle\Entity\Usuario
+    
+#MyHappy\CineManiaBundle\Entity\DocumentFilme:
+#    properties:
+#        file:
+#            - File:
+#                maxSize: 6000000

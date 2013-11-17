@@ -13,7 +13,7 @@ use MyHappy\UsuarioBundle\Form\UsuarioType;
 /**
  * Usuario controller.
  *
- * @Route("/usuario")
+ * @Route("/register")
  */
 class UsuarioController extends Controller
 {
@@ -21,7 +21,7 @@ class UsuarioController extends Controller
     /**
      * Lists all Usuario entities.
      *
-     * @Route("/", name="usuario")
+     * @Route("/", name="register")
      * @Method("GET")
      * @Template()
      */
@@ -38,7 +38,7 @@ class UsuarioController extends Controller
     /**
      * Creates a new Usuario entity.
      *
-     * @Route("/", name="usuario_create")
+     * @Route("/", name="register_create")
      * @Method("POST")
      * @Template("MyHappyUsuarioBundle:Usuario:new.html.twig")
      */
@@ -53,7 +53,7 @@ class UsuarioController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('usuario_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('register_show', array('id' => $entity->getId())));
         }
 
         return array(
@@ -72,7 +72,7 @@ class UsuarioController extends Controller
     private function createCreateForm(Usuario $entity)
     {
         $form = $this->createForm(new UsuarioType(), $entity, array(
-            'action' => $this->generateUrl('usuario_create'),
+            'action' => $this->generateUrl('register_create'),
             'method' => 'POST',
         ));
 
@@ -84,7 +84,7 @@ class UsuarioController extends Controller
     /**
      * Displays a form to create a new Usuario entity.
      *
-     * @Route("/new", name="usuario_new")
+     * @Route("/new", name="register_new")
      * @Method("GET")
      * @Template()
      */
@@ -102,7 +102,7 @@ class UsuarioController extends Controller
     /**
      * Finds and displays a Usuario entity.
      *
-     * @Route("/{id}", name="usuario_show")
+     * @Route("/{id}", name="register_show")
      * @Method("GET")
      * @Template()
      */
@@ -127,7 +127,7 @@ class UsuarioController extends Controller
     /**
      * Displays a form to edit an existing Usuario entity.
      *
-     * @Route("/{id}/edit", name="usuario_edit")
+     * @Route("/{id}/edit", name="register_edit")
      * @Method("GET")
      * @Template()
      */
@@ -161,7 +161,7 @@ class UsuarioController extends Controller
     private function createEditForm(Usuario $entity)
     {
         $form = $this->createForm(new UsuarioType(), $entity, array(
-            'action' => $this->generateUrl('usuario_update', array('id' => $entity->getId())),
+            'action' => $this->generateUrl('register_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -172,7 +172,7 @@ class UsuarioController extends Controller
     /**
      * Edits an existing Usuario entity.
      *
-     * @Route("/{id}", name="usuario_update")
+     * @Route("/{id}", name="register_update")
      * @Method("PUT")
      * @Template("MyHappyUsuarioBundle:Usuario:edit.html.twig")
      */
@@ -193,7 +193,7 @@ class UsuarioController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('usuario_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('register_edit', array('id' => $id)));
         }
 
         return array(
@@ -205,7 +205,7 @@ class UsuarioController extends Controller
     /**
      * Deletes a Usuario entity.
      *
-     * @Route("/{id}", name="usuario_delete")
+     * @Route("/{id}", name="register_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
@@ -225,7 +225,7 @@ class UsuarioController extends Controller
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('usuario'));
+        return $this->redirect($this->generateUrl('register'));
     }
 
     /**
@@ -238,7 +238,7 @@ class UsuarioController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('usuario_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('register_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()

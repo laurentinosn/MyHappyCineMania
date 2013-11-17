@@ -1,15 +1,22 @@
-{#{% extends '::base.html.twig' %}#}
+{% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Promocao creation</h1>
-
-    {{ form(form) }}
-
-        <ul class="record_actions">
-    <li>
+<form data-validacao="parsley" action="{{ path('promocao_create') }}" method="post" {{ form_enctype(form) }} data-autofocus="first">
+    <div  style="width: 1000px; padding-left: 400px">
+        <h1>Cadastro de Promoção</h1>
+            {{ form_row(form.filme) }}
+            {{ form_row(form.dataCriacao) }}
+            {{ form_row(form.dataValidade) }}
+            {{ form_row(form.descricao) }}
+            {{ form_row(form.imagem) }}
+            {{ form_row(form.cinema) }}
+        <br>
+    {{ form_rest(form) }}
+    </div>
+    <div style="padding-left: 400px">
         <a href="{{ path('promocao') }}">
-            Back to the list
+            Exibir Promoções Cadastrados
         </a>
-    </li>
-</ul>
+    </div>
+</form>
 {% endblock %}

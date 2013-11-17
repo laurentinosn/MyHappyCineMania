@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class PromocaoType extends AbstractType
+class PublicidadeType extends AbstractType
 {
         /**
      * @param FormBuilderInterface $builder
@@ -15,12 +15,10 @@ class PromocaoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('dataCriacao')
-            ->add('dataValidade')
-            ->add('descricao')
-            ->add('filme')
-            ->add('imagem', 'file', array())
-            ->add('cinema')
+            ->add('dataInicio')
+            ->add('dataFim')
+            ->add('nome')
+            ->add('imagem', 'file')
         ;
     }
     
@@ -30,7 +28,7 @@ class PromocaoType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'MyHappy\CineManiaBundle\Entity\Promocao'
+            'data_class' => 'MyHappy\CineManiaBundle\Entity\Publicidade'
         ));
     }
 
@@ -39,6 +37,6 @@ class PromocaoType extends AbstractType
      */
     public function getName()
     {
-        return 'myhappy_cinemaniabundle_promocao';
+        return 'myhappy_cinemaniabundle_publicidade';
     }
 }

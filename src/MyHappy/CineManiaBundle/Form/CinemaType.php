@@ -16,11 +16,12 @@ class CinemaType extends AbstractType
     {
         $builder
             ->add('nome')
-            ->add('cnpj')
-            ->add('login')
-            ->add('senha')
+//            ->add('cnpj')
+//            ->add('login')
+//            ->add('senha')
             ->add('endereco')
-            ->add('pessoa')
+            ->add('descricao')
+//            ->add('pessoa')
         ;
     }
     

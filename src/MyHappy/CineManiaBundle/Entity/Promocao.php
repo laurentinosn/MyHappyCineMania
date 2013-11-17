@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Promocao
 {
+
     /**
      * @var integer
      *
@@ -52,14 +53,14 @@ class Promocao
     /**
      * @var string
      *
-     * @ORM\Column(name="imagem", type="string", length=255)
+     * @ORM\Column(name="imagem", type="blob")
      */
     private $imagem;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="regra", type="text")
+     * @ORM\Column(name="regra", type="text", nullable=true)
      */
     private $regra;
 
@@ -78,7 +79,6 @@ class Promocao
      * @ORM\JoinColumn(name="cinefilo", referencedColumnName="id")
      */
     private $cinefilo;
-
 
     /**
      * Get id
@@ -99,7 +99,7 @@ class Promocao
     public function setDataCriacao($dataCriacao)
     {
         $this->dataCriacao = $dataCriacao;
-    
+
         return $this;
     }
 
@@ -122,7 +122,7 @@ class Promocao
     public function setDataValidade($dataValidade)
     {
         $this->dataValidade = $dataValidade;
-    
+
         return $this;
     }
 
@@ -145,7 +145,7 @@ class Promocao
     public function setDescricao($descricao)
     {
         $this->descricao = $descricao;
-    
+
         return $this;
     }
 
@@ -168,7 +168,7 @@ class Promocao
     public function setFilme($filme)
     {
         $this->filme = $filme;
-    
+
         return $this;
     }
 
@@ -191,7 +191,7 @@ class Promocao
     public function setImagem($imagem)
     {
         $this->imagem = $imagem;
-    
+
         return $this;
     }
 
@@ -214,7 +214,7 @@ class Promocao
     public function setRegra($regra)
     {
         $this->regra = $regra;
-    
+
         return $this;
     }
 
@@ -237,7 +237,7 @@ class Promocao
     public function setCinema($cinema)
     {
         $this->cinema = $cinema;
-    
+
         return $this;
     }
 
@@ -260,7 +260,7 @@ class Promocao
     public function setCinefilo($cinefilo)
     {
         $this->cinefilo = $cinefilo;
-    
+
         return $this;
     }
 
@@ -273,4 +273,5 @@ class Promocao
     {
         return $this->cinefilo;
     }
+
 }

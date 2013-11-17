@@ -66,6 +66,13 @@ class Cinema
     private $endereco;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="descricao", type="text")
+     */
+    private $descricao;
+
+    /**
      * 
      * @return String
      */
@@ -220,5 +227,28 @@ class Cinema
     public function getPessoa()
     {
         return $this->pessoa;
+    }
+
+    /**
+     * Set descricao
+     *
+     * @param string $descricao
+     * @return Cinema
+     */
+    public function setDescricao($descricao)
+    {
+        $this->descricao = $descricao;
+    
+        return $this;
+    }
+
+    /**
+     * Get descricao
+     *
+     * @return string 
+     */
+    public function getDescricao()
+    {
+        return $this->descricao;
     }
 }

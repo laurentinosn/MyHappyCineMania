@@ -1,10 +1,10 @@
 <?php
 
-namespace MyHappy\UsuarioBundle\Tests\Controller;
+namespace MyHappy\CineManiaBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class UsuarioControllerTest extends WebTestCase
+class PublicidadeControllerTest extends WebTestCase
 {
     /*
     public function testCompleteScenario()
@@ -13,13 +13,13 @@ class UsuarioControllerTest extends WebTestCase
         $client = static::createClient();
 
         // Create a new entry in the database
-        $crawler = $client->request('GET', '/register/');
-        $this->assertEquals(200, $client->getResponse()->getStatusCode(), "Unexpected HTTP status code for GET /register/");
+        $crawler = $client->request('GET', '/publicidade/');
+        $this->assertEquals(200, $client->getResponse()->getStatusCode(), "Unexpected HTTP status code for GET /publicidade/");
         $crawler = $client->click($crawler->selectLink('Create a new entry')->link());
 
         // Fill in the form and submit it
         $form = $crawler->selectButton('Create')->form(array(
-            'myhappy_usuariobundle_usuariotype[field_name]'  => 'Test',
+            'myhappy_cinemaniabundle_publicidadetype[field_name]'  => 'Test',
             // ... other fields to fill
         ));
 
@@ -33,7 +33,7 @@ class UsuarioControllerTest extends WebTestCase
         $crawler = $client->click($crawler->selectLink('Edit')->link());
 
         $form = $crawler->selectButton('Edit')->form(array(
-            'myhappy_usuariobundle_usuariotype[field_name]'  => 'Foo',
+            'myhappy_cinemaniabundle_publicidadetype[field_name]'  => 'Foo',
             // ... other fields to fill
         ));
 

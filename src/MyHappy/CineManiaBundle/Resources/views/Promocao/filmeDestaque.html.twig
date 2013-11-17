@@ -1,0 +1,32 @@
+<div class="latest-posts">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 com-sm-12 col-xs-12">
+                <h3 class="title">Últimos Filmes</h3>
+            </div>
+            <div class="clearfix"></div>
+            <div class="blog-showcase col-lg-12 col-md-12 col-sm-12 col-xs-12 animate_afb d1">
+                <ul>
+                    <ul>
+                        {% for filme in filmes %}
+                        <li class="">
+                            <div class="blog-showcase-thumb col-lg-4">
+                                <div class="post-body">
+                                    <a class="post-item-link" href="{{asset('bundles/myhappycinemania/img/portfolio/ {{ filme.filme }}.jpg')}}" data-rel="prettyPhoto"><span class="post-item-hover"></span><span class="fullscreen"><i class="icon-search"></i></span><img alt="" src="{{asset('bundles/myhappycinemania/img/portfolio/{{ filme.filme }} _g.jpg')}}"></a>
+                                </div>
+                            </div>
+                            <div class="blog-showcase-extra-info col-lg-4">
+                                <span><a href="#">filme.dataCriacao</a></span>
+                                <h4><a href="#" class="title">filme.filme</a></h4>
+                                <p>filme.descricao</p>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <div class="divider"></div>
+    </div>
+</div>

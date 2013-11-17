@@ -1,14 +1,14 @@
-{#{% extends '::base.html.twig' %}#}
+{% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Promocao edit</h1>
+    <h1>Editar uma Promoção</h1>
 
     {{ form(edit_form) }}
 
         <ul class="record_actions">
     <li>
         <a href="{{ path('promocao') }}">
-            Back to the list
+            Voltar para a Lista
         </a>
     </li>
     <li>{{ form(delete_form) }}</li>

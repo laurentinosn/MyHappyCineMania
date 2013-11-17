@@ -7,21 +7,21 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use MyHappy\CineManiaBundle\Entity\Promocao;
-use MyHappy\CineManiaBundle\Form\PromocaoType;
+use MyHappy\CineManiaBundle\Entity\Publicidade;
+use MyHappy\CineManiaBundle\Form\PublicidadeType;
 
 /**
- * Promocao controller.
+ * Publicidade controller.
  *
- * @Route("/promocao")
+ * @Route("/publicidade")
  */
-class PromocaoController extends Controller
+class PublicidadeController extends Controller
 {
 
     /**
-     * Lists all Promocao entities.
+     * Lists all Publicidade entities.
      *
-     * @Route("/", name="promocao")
+     * @Route("/", name="publicidade")
      * @Method("GET")
      * @Template()
      */
@@ -29,31 +29,31 @@ class PromocaoController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('MyHappyCineManiaBundle:Promocao')->findAll();
+        $entities = $em->getRepository('MyHappyCineManiaBundle:Publicidade')->findAll();
 
         return array(
             'entities' => $entities,
         );
     }
     /**
-     * Creates a new Promocao entity.
+     * Creates a new Publicidade entity.
      *
-     * @Route("/", name="promocao_create")
+     * @Route("/", name="publicidade_create")
      * @Method("POST")
-     * @Template("MyHappyCineManiaBundle:Promocao:new.html.twig")
+     * @Template("MyHappyCineManiaBundle:Publicidade:new.html.twig")
      */
     public function createAction(Request $request)
     {
-        $entity = new Promocao();
+        $entity = new Publicidade();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
-        
+
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('promocao_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('publicidade_show', array('id' => $entity->getId())));
         }
 
         return array(
@@ -63,16 +63,16 @@ class PromocaoController extends Controller
     }
 
     /**
-    * Creates a form to create a Promocao entity.
+    * Creates a form to create a Publicidade entity.
     *
-    * @param Promocao $entity The entity
+    * @param Publicidade $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createCreateForm(Promocao $entity)
+    private function createCreateForm(Publicidade $entity)
     {
-        $form = $this->createForm(new PromocaoType(), $entity, array(
-            'action' => $this->generateUrl('promocao_create'),
+        $form = $this->createForm(new PublicidadeType(), $entity, array(
+            'action' => $this->generateUrl('publicidade_create'),
             'method' => 'POST',
         ));
 
@@ -82,15 +82,15 @@ class PromocaoController extends Controller
     }
 
     /**
-     * Displays a form to create a new Promocao entity.
+     * Displays a form to create a new Publicidade entity.
      *
-     * @Route("/new", name="promocao_new")
+     * @Route("/new", name="publicidade_new")
      * @Method("GET")
      * @Template()
      */
     public function newAction()
     {
-        $entity = new Promocao();
+        $entity = new Publicidade();
         $form   = $this->createCreateForm($entity);
 
         return array(
@@ -100,9 +100,9 @@ class PromocaoController extends Controller
     }
 
     /**
-     * Finds and displays a Promocao entity.
+     * Finds and displays a Publicidade entity.
      *
-     * @Route("/{id}", name="promocao_show")
+     * @Route("/{id}", name="publicidade_show")
      * @Method("GET")
      * @Template()
      */
@@ -110,10 +110,10 @@ class PromocaoController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('MyHappyCineManiaBundle:Promocao')->find($id);
+        $entity = $em->getRepository('MyHappyCineManiaBundle:Publicidade')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Promocao entity.');
+            throw $this->createNotFoundException('Unable to find Publicidade entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -125,9 +125,9 @@ class PromocaoController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing Promocao entity.
+     * Displays a form to edit an existing Publicidade entity.
      *
-     * @Route("/{id}/edit", name="promocao_edit")
+     * @Route("/{id}/edit", name="publicidade_edit")
      * @Method("GET")
      * @Template()
      */
@@ -135,10 +135,10 @@ class PromocaoController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('MyHappyCineManiaBundle:Promocao')->find($id);
+        $entity = $em->getRepository('MyHappyCineManiaBundle:Publicidade')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Promocao entity.');
+            throw $this->createNotFoundException('Unable to find Publicidade entity.');
         }
 
         $editForm = $this->createEditForm($entity);
@@ -152,16 +152,16 @@ class PromocaoController extends Controller
     }
 
     /**
-    * Creates a form to edit a Promocao entity.
+    * Creates a form to edit a Publicidade entity.
     *
-    * @param Promocao $entity The entity
+    * @param Publicidade $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createEditForm(Promocao $entity)
+    private function createEditForm(Publicidade $entity)
     {
-        $form = $this->createForm(new PromocaoType(), $entity, array(
-            'action' => $this->generateUrl('promocao_update', array('id' => $entity->getId())),
+        $form = $this->createForm(new PublicidadeType(), $entity, array(
+            'action' => $this->generateUrl('publicidade_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -170,20 +170,20 @@ class PromocaoController extends Controller
         return $form;
     }
     /**
-     * Edits an existing Promocao entity.
+     * Edits an existing Publicidade entity.
      *
-     * @Route("/{id}", name="promocao_update")
+     * @Route("/{id}", name="publicidade_update")
      * @Method("PUT")
-     * @Template("MyHappyCineManiaBundle:Promocao:edit.html.twig")
+     * @Template("MyHappyCineManiaBundle:Publicidade:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('MyHappyCineManiaBundle:Promocao')->find($id);
+        $entity = $em->getRepository('MyHappyCineManiaBundle:Publicidade')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Promocao entity.');
+            throw $this->createNotFoundException('Unable to find Publicidade entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -193,7 +193,7 @@ class PromocaoController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('promocao_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('publicidade_edit', array('id' => $id)));
         }
 
         return array(
@@ -203,9 +203,9 @@ class PromocaoController extends Controller
         );
     }
     /**
-     * Deletes a Promocao entity.
+     * Deletes a Publicidade entity.
      *
-     * @Route("/{id}", name="promocao_delete")
+     * @Route("/{id}", name="publicidade_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
@@ -215,21 +215,21 @@ class PromocaoController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('MyHappyCineManiaBundle:Promocao')->find($id);
+            $entity = $em->getRepository('MyHappyCineManiaBundle:Publicidade')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Promocao entity.');
+                throw $this->createNotFoundException('Unable to find Publicidade entity.');
             }
 
             $em->remove($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('promocao'));
+        return $this->redirect($this->generateUrl('publicidade'));
     }
 
     /**
-     * Creates a form to delete a Promocao entity by id.
+     * Creates a form to delete a Publicidade entity by id.
      *
      * @param mixed $id The entity id
      *
@@ -238,26 +238,10 @@ class PromocaoController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('promocao_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('publicidade_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
         ;
-    }
-    
-    /**
-     * Exibe os filmes do momento.
-     *
-     * @Route("/promocao/show", name="filme_destaques")
-     * @Method("GET")
-     * @Template()
-     */
-    public function filmeDestaqueAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-        
-        $cinemas = $em->getRepository("MyHappyCineManiaBundle:Promocao")->findBy(array(), array("id" => "desc"), 3);
-        
-        return array("filmes" => $cinemas);
     }
 }

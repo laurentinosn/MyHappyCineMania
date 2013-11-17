@@ -1,14 +1,14 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Usuario edit</h1>
+    <h1>Editar Publicidade</h1>
 
     {{ form(edit_form) }}
 
         <ul class="record_actions">
     <li>
-        <a href="{{ path('register') }}">
-            Back to the list
+        <a href="{{ path('publicidade') }}">
+            Votlar para a Lista
         </a>
     </li>
     <li>{{ form(delete_form) }}</li>

@@ -1,0 +1,19 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+<form data-validacao="parsley" action="{{ path('publicidade_create') }}" method="post" {{ form_enctype(form) }} data-autofocus="first">
+    <div  style="width: 1000px; padding-left: 400px">
+        <h1>Cadastro de Publicidade</h1>
+            {{ form_row(form.nome) }}
+            {{ form_row(form.dataInicio) }}
+            {{ form_row(form.dataFim) }}
+        <br>
+    {{ form_rest(form) }}
+    </div>
+    <div style="padding-left: 400px">
+        <a href="{{ path('publicidade') }}">
+            Exibir Publicidades Cadastrados
+        </a>
+    </div>
+</form>
+{% endblock %}
