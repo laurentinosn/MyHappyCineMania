@@ -2,13 +2,15 @@
 
 namespace MyHappy\CineManiaBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use MyHappy\CineManiaBundle\Entity\Promocao;
+use MyHappy\CineManiaBundle\Form\PromocaoType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use MyHappy\CineManiaBundle\Entity\Promocao;
-use MyHappy\CineManiaBundle\Form\PromocaoType;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Form;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Promocao controller.
@@ -35,6 +37,7 @@ class PromocaoController extends Controller
             'entities' => $entities,
         );
     }
+
     /**
      * Creates a new Promocao entity.
      *
@@ -47,7 +50,7 @@ class PromocaoController extends Controller
         $entity = new Promocao();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
-        
+
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
@@ -58,17 +61,17 @@ class PromocaoController extends Controller
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         );
     }
 
     /**
-    * Creates a form to create a Promocao entity.
-    *
-    * @param Promocao $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to create a Promocao entity.
+     *
+     * @param Promocao $entity The entity
+     *
+     * @return Form The form
+     */
     private function createCreateForm(Promocao $entity)
     {
         $form = $this->createForm(new PromocaoType(), $entity, array(
@@ -91,11 +94,11 @@ class PromocaoController extends Controller
     public function newAction()
     {
         $entity = new Promocao();
-        $form   = $this->createCreateForm($entity);
+        $form = $this->createCreateForm($entity);
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         );
     }
 
@@ -119,7 +122,7 @@ class PromocaoController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
+            'entity' => $entity,
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -145,19 +148,19 @@ class PromocaoController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
 
     /**
-    * Creates a form to edit a Promocao entity.
-    *
-    * @param Promocao $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to edit a Promocao entity.
+     *
+     * @param Promocao $entity The entity
+     *
+     * @return Form The form
+     */
     private function createEditForm(Promocao $entity)
     {
         $form = $this->createForm(new PromocaoType(), $entity, array(
@@ -169,6 +172,7 @@ class PromocaoController extends Controller
 
         return $form;
     }
+
     /**
      * Edits an existing Promocao entity.
      *
@@ -197,11 +201,12 @@ class PromocaoController extends Controller
         }
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
+
     /**
      * Deletes a Promocao entity.
      *
@@ -233,18 +238,18 @@ class PromocaoController extends Controller
      *
      * @param mixed $id The entity id
      *
-     * @return \Symfony\Component\Form\Form The form
+     * @return Form The form
      */
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('promocao_delete', array('id' => $id)))
-            ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
-            ->getForm()
+                        ->setAction($this->generateUrl('promocao_delete', array('id' => $id)))
+                        ->setMethod('DELETE')
+                        ->add('submit', 'submit', array('label' => 'Delete'))
+                        ->getForm()
         ;
     }
-    
+
     /**
      * Exibe os filmes do momento.
      *
@@ -255,9 +260,37 @@ class PromocaoController extends Controller
     public function filmeDestaqueAction()
     {
         $em = $this->getDoctrine()->getManager();
-        
+
         $cinemas = $em->getRepository("MyHappyCineManiaBundle:Promocao")->findBy(array(), array("id" => "desc"), 3);
-        
+
         return array("filmes" => $cinemas);
     }
+
+    /**
+     * Exibe as imagens pequenas dos filmes
+     * @Route("/promocao/imagemp/{id}", name="filme_imagemp")
+     * @Method("GET")
+     * @Template()
+     */
+    public function imagemPequenaAction($id)
+    {
+        $response = new Response();
+//        $response->headers->add("1","1");
+
+        $filme = $this
+                ->getDoctrine()
+                ->getManager()
+                ->getRepository("MyHappyCineManiaBundle:Promocao")
+                ->find($id)
+        ;
+        
+        var_dump($filme->getImagem());
+        die();
+         $response = new Response(stream_get_contents($filme->getImagem()), 200, array(
+            'Content-Type' => 'image/jpeg'
+        ));
+        
+        return $response;
+    }
+
 }

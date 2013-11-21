@@ -79,6 +79,11 @@ class Promocao
      * @ORM\JoinColumn(name="cinefilo", referencedColumnName="id")
      */
     private $cinefilo;
+    
+    public function getImagePequena()
+    {
+        return "/web/bundles/myhappycinemania/img/1logo.png";
+    }
 
     /**
      * Get id
