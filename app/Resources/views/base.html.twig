@@ -48,8 +48,8 @@
                 {% render(controller('MyHappyCineManiaBundle:Promocao:filmeDestaque')) %}
 {#                {% include 'MyHappyCineManiaBundle:Default:filmes_destaques.html.twig' %}#}
                 
-                {% include 'MyHappyCineManiaBundle:Default:publicidades.html.twig' %}
-                
+{#                {% include 'MyHappyCineManiaBundle:Default:publicidades.html.twig' %}#}
+                {% render(controller('MyHappyCineManiaBundle:Publicidade:publicidadeDestaque')) %}
                 {% endblock %}
             </div>
             

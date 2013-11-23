@@ -19,7 +19,9 @@ class PromocaoType extends AbstractType
             ->add('dataValidade')
             ->add('descricao')
             ->add('filme')
-            ->add('imagem', 'file', array())
+            ->add('imagem', 'file', array(
+                'data_class' => null
+            ))
             ->add('cinema')
         ;
     }

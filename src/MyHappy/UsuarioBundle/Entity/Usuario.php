@@ -21,7 +21,7 @@ class Usuario extends BaseUser
     /**
      * @var String
      * 
-     * @ORM\Column(name="documento", type="string", length=255)
+     * @ORM\Column(name="documento", type="string", length=255, nullable=true)
      * 
      */
     private $documento;

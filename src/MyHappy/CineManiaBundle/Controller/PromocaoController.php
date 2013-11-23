@@ -53,6 +53,10 @@ class PromocaoController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
+            $img = fopen($entity->getImagem(), 'rb');
+            $entity->setImagem(stream_get_contents($img));
+
             $em->persist($entity);
             $em->flush();
 
@@ -194,6 +198,9 @@ class PromocaoController extends Controller
         $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);
 
+        $img = fopen($entity->getImagem(), 'rb');
+        $entity->setImagem(stream_get_contents($img));
+
         if ($editForm->isValid()) {
             $em->flush();
 
@@ -268,14 +275,14 @@ class PromocaoController extends Controller
 
     /**
      * Exibe as imagens pequenas dos filmes
-     * @Route("/promocao/imagemp/{id}", name="filme_imagemp")
+     * @Route("/promocao/imagemp/{id}", name="filmes_imagemp")
      * @Method("GET")
      * @Template()
      */
     public function imagemPequenaAction($id)
     {
+        
         $response = new Response();
-//        $response->headers->add("1","1");
 
         $filme = $this
                 ->getDoctrine()
@@ -283,13 +290,11 @@ class PromocaoController extends Controller
                 ->getRepository("MyHappyCineManiaBundle:Promocao")
                 ->find($id)
         ;
-        
-        var_dump($filme->getImagem());
-        die();
-         $response = new Response(stream_get_contents($filme->getImagem()), 200, array(
+
+        $response = new Response(stream_get_contents($filme->getImagem()), 200, array(
             'Content-Type' => 'image/jpeg'
         ));
-        
+
         return $response;
     }
 

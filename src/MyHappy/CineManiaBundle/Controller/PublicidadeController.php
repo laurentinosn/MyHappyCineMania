@@ -2,13 +2,15 @@
 
 namespace MyHappy\CineManiaBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use MyHappy\CineManiaBundle\Entity\Publicidade;
+use MyHappy\CineManiaBundle\Form\PublicidadeType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use MyHappy\CineManiaBundle\Entity\Publicidade;
-use MyHappy\CineManiaBundle\Form\PublicidadeType;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Form;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Publicidade controller.
@@ -35,6 +37,7 @@ class PublicidadeController extends Controller
             'entities' => $entities,
         );
     }
+
     /**
      * Creates a new Publicidade entity.
      *
@@ -50,6 +53,10 @@ class PublicidadeController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
+            $img = fopen($entity->getImagem(), 'rb');
+            $entity->setImagem(stream_get_contents($img));
+
             $em->persist($entity);
             $em->flush();
 
@@ -58,17 +65,17 @@ class PublicidadeController extends Controller
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         );
     }
 
     /**
-    * Creates a form to create a Publicidade entity.
-    *
-    * @param Publicidade $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to create a Publicidade entity.
+     *
+     * @param Publicidade $entity The entity
+     *
+     * @return Form The form
+     */
     private function createCreateForm(Publicidade $entity)
     {
         $form = $this->createForm(new PublicidadeType(), $entity, array(
@@ -91,11 +98,11 @@ class PublicidadeController extends Controller
     public function newAction()
     {
         $entity = new Publicidade();
-        $form   = $this->createCreateForm($entity);
+        $form = $this->createCreateForm($entity);
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         );
     }
 
@@ -119,7 +126,7 @@ class PublicidadeController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
+            'entity' => $entity,
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -145,19 +152,19 @@ class PublicidadeController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
 
     /**
-    * Creates a form to edit a Publicidade entity.
-    *
-    * @param Publicidade $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to edit a Publicidade entity.
+     *
+     * @param Publicidade $entity The entity
+     *
+     * @return Form The form
+     */
     private function createEditForm(Publicidade $entity)
     {
         $form = $this->createForm(new PublicidadeType(), $entity, array(
@@ -169,6 +176,7 @@ class PublicidadeController extends Controller
 
         return $form;
     }
+
     /**
      * Edits an existing Publicidade entity.
      *
@@ -188,7 +196,11 @@ class PublicidadeController extends Controller
 
         $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createEditForm($entity);
+
         $editForm->handleRequest($request);
+
+        $img = fopen($entity->getImagem(), 'rb');
+        $entity->setImagem(stream_get_contents($img));
 
         if ($editForm->isValid()) {
             $em->flush();
@@ -197,11 +209,12 @@ class PublicidadeController extends Controller
         }
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
+
     /**
      * Deletes a Publicidade entity.
      *
@@ -233,15 +246,57 @@ class PublicidadeController extends Controller
      *
      * @param mixed $id The entity id
      *
-     * @return \Symfony\Component\Form\Form The form
+     * @return Form The form
      */
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('publicidade_delete', array('id' => $id)))
-            ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
-            ->getForm()
+                        ->setAction($this->generateUrl('publicidade_delete', array('id' => $id)))
+                        ->setMethod('DELETE')
+                        ->add('submit', 'submit', array('label' => 'Delete'))
+                        ->getForm()
         ;
+    }
+
+    /**
+     * Exibe as Propagandas.
+     *
+     * @Route("/publicidade/show", name="publicidade_destaques")
+     * @Method("GET")
+     * @Template()
+     */
+    public function publicidadeDestaqueAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $publicidades = $em->getRepository("MyHappyCineManiaBundle:Publicidade")->findAll();
+
+        return array("publicidades" => $publicidades);
+    }
+
+    /**
+     * Exibe as imagens pequenas das publicidades
+     * 
+     * @Route("/publicidade/imagemp/maior/{id}", name="publicidade_img")
+     * @Method("GET")
+     * @Template()
+     */
+    public function imagemPequenaAction($id)
+    {
+
+        $response = new Response();
+
+        $publicidade = $this
+                ->getDoctrine()
+                ->getManager()
+                ->getRepository("MyHappyCineManiaBundle:Publicidade")
+                ->find($id)
+        ;
+
+        $response = new Response(stream_get_contents($publicidade->getImagem()), 200, array(
+            'Content-Type' => 'image/jpeg'
+        ));
+
+        return $response;
     }
 }

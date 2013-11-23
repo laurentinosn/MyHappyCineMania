@@ -40,21 +40,21 @@ class Cinema
     /**
      * @var string
      *
-     * @ORM\Column(name="cnpj", type="string", length=255)
+     * @ORM\Column(name="cnpj", type="string", length=255, nullable=true)
      */
     private $cnpj;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="login", type="string", length=255)
+     * @ORM\Column(name="login", type="string", length=255, nullable=true)
      */
     private $login;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="senha", type="string", length=255)
+     * @ORM\Column(name="senha", type="string", length=255, nullable=true)
      */
     private $senha;
 

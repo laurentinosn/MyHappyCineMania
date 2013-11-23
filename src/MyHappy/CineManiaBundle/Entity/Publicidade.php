@@ -45,7 +45,7 @@ class Publicidade
     /**
      * @var string
      *
-     * @ORM\Column(name="imagem", type="string", length=255)
+     * @ORM\Column(name="imagem", type="blob")
      */
     private $imagem;
     

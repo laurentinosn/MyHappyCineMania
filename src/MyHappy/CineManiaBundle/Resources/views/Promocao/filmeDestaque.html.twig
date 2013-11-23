@@ -12,13 +12,13 @@
                         <li class="">
                             <div class="blog-showcase-thumb col-lg-4">
                                 <div class="post-body">
-                                    <a class="post-item-link" href=" {{ path('filme_imagemp', { 'id': filme.id} ) }}" data-rel="prettyPhoto"><span class="post-item-hover"></span><span class="fullscreen"><i class="icon-search"></i></span><img alt="" src="{{asset('bundles/myhappycinemania/img/portfolio/'~filme.filme~'_g.jpg')}}"></a>
+                                    <a class="post-item-link" href="{{ path('filmes_imagemp', { 'id': filme.id} ) }}" data-rel="prettyPhoto"><span class="post-item-hover"></span><span class="fullscreen"><i class="icon-search"></i></span><img alt="" src="{{ path('filmes_imagemp', { 'id': filme.id} ) }}"></a>
                                 </div>
                             </div>
                             <div class="blog-showcase-extra-info col-lg-4">
                                 <span><a href="#">filme.dataCriacao</a></span>
-                                <h4><a href="#" class="title">filme.filme</a></h4>
-                                <p>filme.descricao</p>
+                                <h4><a href="#" class="title">{{ filme.filme }}</a></h4>
+                                <p>{{ filme.descricao }}</p>
                             </div>
                         </li>
                         {% endfor %}

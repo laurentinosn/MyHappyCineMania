@@ -8,15 +8,16 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 class DefaultController extends Controller
 {
+
     /**
-     * @Route("/home", name="home")
+     * @Route("/", name="home")
      * @Template()
      */
     public function indexAction($name = "neto")
     {
         return array('name' => $name);
     }
-    
+
     /**
      * @Route("/menu")
      * @Template()
@@ -25,4 +26,22 @@ class DefaultController extends Controller
     {
         return array();
     }
+
+    /**
+     * Portifólio
+     * @Route("/portifolio", name="portifolio")
+     * @Template() 
+     * 
+     */
+    public function portifolioAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $filmes = $em->getRepository("MyHappyCineManiaBundle:Promocao")->findAll();
+        $cinemas = $em->getRepository("MyHappyCineManiaBundle:Cinema")->findAll();
+
+        return array("filmes" => $filmes,
+            "cinemas" => $cinemas);
+    }
+
 }

@@ -18,7 +18,9 @@ class PublicidadeType extends AbstractType
             ->add('dataInicio')
             ->add('dataFim')
             ->add('nome')
-            ->add('imagem', 'file')
+            ->add('imagem', 'file', array(
+                'data_class' => null
+            ))
         ;
     }
     

@@ -80,10 +80,6 @@ class Promocao
      */
     private $cinefilo;
     
-    public function getImagePequena()
-    {
-        return "/web/bundles/myhappycinemania/img/1logo.png";
-    }
 
     /**
      * Get id
