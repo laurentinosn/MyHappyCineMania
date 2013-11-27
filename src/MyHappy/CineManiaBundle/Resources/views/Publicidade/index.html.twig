@@ -17,8 +17,8 @@
         {% for entity in entities %}
             <tr>
                 <td><a href="{{ path('publicidade_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{% if entity.dataInicio %}{{ entity.dataInicio|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if entity.dataFim %}{{ entity.dataFim|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if entity.dataInicio %}{{ entity.dataInicio|date('d/m/Y') }}{% endif %}</td>
+                <td>{% if entity.dataFim %}{{ entity.dataFim|date('d/m/Y') }}{% endif %}</td>
                 <td>{{ entity.nome }}</td>
                 <td>
                 <ul>

@@ -16,8 +16,8 @@
                                 </div>
                             </div>
                             <div class="blog-showcase-extra-info col-lg-4">
-                                <span><a href="#">filme.dataCriacao</a></span>
-                                <h4><a href="#" class="title">{{ filme.filme }}</a></h4>
+                                <span><a href="#">{{ filme.dataCriacao|date('d/m/Y') }}</a></span>
+                                <h4><a href="{{ path('gera_voucher', { 'idCinema': filme.cinema.id, 'idFilme' : filme.id} ) }}" class="title">{{ filme.filme }} em {{ filme.cinema.nome}}</a></h4>
                                 <p>{{ filme.descricao }}</p>
                             </div>
                         </li>

@@ -15,7 +15,6 @@ class PromocaoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('dataCriacao')
             ->add('dataValidade')
             ->add('descricao')
             ->add('filme')

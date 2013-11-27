@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table()
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks
  */
 class Promocao
 {
@@ -53,7 +54,7 @@ class Promocao
     /**
      * @var string
      *
-     * @ORM\Column(name="imagem", type="blob")
+     * @ORM\Column(name="imagem", type="blob", nullable=true)
      */
     private $imagem;
 
@@ -79,7 +80,6 @@ class Promocao
      * @ORM\JoinColumn(name="cinefilo", referencedColumnName="id")
      */
     private $cinefilo;
-    
 
     /**
      * Get id
@@ -274,5 +274,13 @@ class Promocao
     {
         return $this->cinefilo;
     }
+
+        /**
+         * @ORM\PrePersist
+         */
+        public function doStuffOnPrePersist()
+        {
+            $this->dataCriacao = new \DateTime('now');
+        }
 
 }

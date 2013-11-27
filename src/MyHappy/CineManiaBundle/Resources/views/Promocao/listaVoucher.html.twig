@@ -1,0 +1,29 @@
+{% extends '::base.html.twig' %}
+{% block body -%}
+
+<div style="width: 1000px; padding-left: 400px">
+    <h3 class="title">Meus Vouchers</h3>
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Filme</th>
+                <th>Cinema</th>
+                <th>Status</th>
+                <th>Imprimir</th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            {% for voucher in vouchers %}
+            <tr>
+                <td>{{ voucher.filme.filme }}</td>
+                <td>{{ voucher.cinema.nome }}</td>
+                <td>{% if(voucher.status == 0) %} Aberto {% elseif (voucher.status == 1) %} Aprovado {% elseif voucher.status == 2%} Cancelado {% endif %}</td>
+                <td>{% if(voucher.status == 1) %}<a href=""> Imprimir </a>{% elseif (voucher.status == 0) %} Não Disponível {% elseif (voucher.status == 2)%}<spam style="color: red"> Cancelado </spam>{% endif %}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

@@ -1,0 +1,7 @@
+registration:
+    confirmed: Cadastro Efetuado com sucesso
+form:
+    email: E-Mail
+    username: Nome do Usuário
+    password: Senha
+    password_confirmation: Confirme a Senha

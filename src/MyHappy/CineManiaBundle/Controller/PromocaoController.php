@@ -3,7 +3,9 @@
 namespace MyHappy\CineManiaBundle\Controller;
 
 use MyHappy\CineManiaBundle\Entity\Promocao;
+use MyHappy\CineManiaBundle\Entity\Voucher;
 use MyHappy\CineManiaBundle\Form\PromocaoType;
+use MyHappy\CineManiaBundle\Utils\Notice;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -281,7 +283,7 @@ class PromocaoController extends Controller
      */
     public function imagemPequenaAction($id)
     {
-        
+
         $response = new Response();
 
         $filme = $this
@@ -296,6 +298,89 @@ class PromocaoController extends Controller
         ));
 
         return $response;
+    }
+
+    /**
+     * Gera um Voucher do Filme em questão
+     * @Route("/promocao/voucher/{idCinema}/{idFilme}", name="gera_voucher")
+     * @Method("GET")
+     * @Template()
+     */
+    public function gerarVoucherAction($idCinema, $idFilme)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+
+        $cinema = $em->getRepository("MyHappyCineManiaBundle:Cinema")->find($idCinema);
+        $filme = $em->getRepository("MyHappyCineManiaBundle:Promocao")->find($idFilme);
+
+        $voucher = new Voucher();
+
+//        var_dump($this->getUser());
+//        die();
+//        
+        $voucher
+                ->setCinema($cinema)
+                ->setFilme($filme)
+                ->setUsuario($this->getUser())
+                ->setStatus(0)
+        ;
+
+
+        $em->persist($voucher);
+        $em->flush();
+
+        return array("voucher" => $voucher);
+    }
+
+    /**
+     * Lista vouchers do usuario
+     * @Route("/promocao/voucher/listar", name="lista_voucher")
+     * @Method("GET")
+     * @Template()
+     */
+    public function listaVoucherAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $vouchers = $em->getRepository("MyHappyCineManiaBundle:Voucher")->findByUsuario($this->getUser());
+
+        return array("vouchers" => $vouchers);
+    }
+
+    /**
+     * Lista vouchers a validar
+     * @Route("/promocao/voucher/valida", name="valida_voucher")
+     * @Method("GET")
+     * @Template()
+     */
+    public function listaVoucherValidarAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $vouchers = $em->getRepository("MyHappyCineManiaBundle:Voucher")->findBy(array('status' => 0));
+        
+        return array("vouchers" => $vouchers);
+    }
+
+    /**
+     * Lista vouchers a validar
+        * @Route("/promocao/voucher/atualiza/{id}/{status}", name="atualiza_voucher")
+     * @Method("GET")
+     * @Template()
+     */
+    public function atualizaVoucherAction($id, $status)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $voucher = $em->getRepository("MyHappyCineManiaBundle:Voucher")->find($id);
+        /* @var $voucher Voucher */
+        
+        $voucher->setStatus($status);
+        $em->persist($voucher);
+        $em->flush();        
+        
+        return $this->redirect($this->generateUrl('valida_voucher'));
     }
 
 }

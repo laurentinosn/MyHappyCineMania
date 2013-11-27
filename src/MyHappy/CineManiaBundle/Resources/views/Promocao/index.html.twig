@@ -9,12 +9,8 @@
                 <th>Id</th>
                 <th>Datacriacao</th>
                 <th>Datavalidade</th>
-                <th>Descricao</th>
                 <th>Filme</th>
-                <th>Imagem</th>
-                <th>Regra</th>
                 <th>Cinema</th>
-                <th>Cinefilo</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -22,14 +18,10 @@
         {% for entity in entities %}
             <tr>
                 <td><a href="{{ path('promocao_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{% if entity.dataCriacao %}{{ entity.dataCriacao|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if entity.dataValidade %}{{ entity.dataValidade|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ entity.descricao }}</td>
+                <td>{% if entity.dataCriacao %}{{ entity.dataCriacao|date('d/m/Y') }}{% endif %}</td>
+                <td>{% if entity.dataValidade %}{{ entity.dataValidade|date('d/m/Y') }}{% endif %}</td>
                 <td>{{ entity.filme }}</td>
-                <td>{{ entity.imagem }}</td>
-                <td>{{ entity.regra }}</td>
                 <td>{{ entity.cinema }}</td>
-                <td>{{ entity.cinefilo }}</td>
                 <td>
                 <ul>
                     <li>

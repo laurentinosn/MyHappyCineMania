@@ -1,0 +1,27 @@
+{% extends '::base.html.twig' %}
+{% block body -%}
+
+<div style="width: 1000px; padding-left: 400px">
+    <h3 class="title">Voucher Para Validar</h3>
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Filme</th>
+                <th>Cinema</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            {% for voucher in vouchers %}
+            <tr>
+                <td>{{ voucher.filme.filme }}</td>
+                <td>{{ voucher.cinema.nome }}</td>
+                <td><a href="{{ path('atualiza_voucher', { 'id': voucher.id, 'status' : '1'} ) }}">Validar</a> | <a href="{{ path('atualiza_voucher', { 'id': voucher.id, 'status' : '2'} ) }}">Cancelar</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
