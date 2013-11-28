@@ -21,10 +21,12 @@ class Usuario extends BaseUser
     /**
      * @var String
      * 
-     * @ORM\Column(name="documento", type="string", length=255, nullable=true)
+     * @ORM\Column(name="tipo", type="integer", nullable=true)
      * 
      */
-    private $documento;
+    private $tipo;
+    
+    
     
     public function __construct()
     {   
@@ -42,25 +44,25 @@ class Usuario extends BaseUser
     }
 
     /**
-     * Set documento
+     * Set tipo
      *
-     * @param string $documento
+     * @param integer $tipo
      * @return Usuario
      */
-    public function setDocumento($documento)
+    public function setTipo($tipo)
     {
-        $this->documento = $documento;
+        $this->tipo = $tipo;
     
         return $this;
     }
 
     /**
-     * Get documento
+     * Get tipo
      *
-     * @return string 
+     * @return integer 
      */
-    public function getDocumento()
+    public function getTipo()
     {
-        return $this->documento;
+        return $this->tipo;
     }
 }
